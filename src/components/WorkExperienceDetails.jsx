@@ -10,6 +10,11 @@ export function WorkExperienceDetails() {
         setWorkExperienceList(prevList => [...prevList, currentWorkExperienceFormData])
     }
 
+    const deleteWorkExperience = (companyToBeRemoved) => {
+        const filteredCompanies = workExperienceList.filter(company => company.companyName !== companyToBeRemoved)
+        setWorkExperienceList(filteredCompanies);
+    }
+
     console.log(workExperienceList)
 
     return (
@@ -18,7 +23,10 @@ export function WorkExperienceDetails() {
         <h2>Experience</h2>
         
         {workExperienceList.length > 0 && workExperienceList.map((workExperience, index) =>
-            <p key={index}>{workExperience.companyName}</p>
+            <div key={index} style={{display:'flex', justifyContent:'center'}}>
+                <p >{workExperience.companyName}</p>
+                <button onClick={() => deleteWorkExperience(workExperience.companyName)}>Delete</button>
+            </div>
         )}
 
         <button className="btn" onClick={() => setShowWorkExperienceForm(true)}>
@@ -53,7 +61,7 @@ function AddNewWorkExperienceForm({handleAddWorkExperience ,setShowAddWorkExperi
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const hasNonEmptyField = Object.values(currentWorkExperienceFormData).some(value => value.trim() !== '');
+        const hasNonEmptyField = Object.values(currentWorkExperienceFormData.companyName).some(value => value.trim() !== '');
         if (hasNonEmptyField) {
             handleAddWorkExperience(currentWorkExperienceFormData)
         }

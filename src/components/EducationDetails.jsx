@@ -9,14 +9,24 @@ export function InputDetails() {
   const handleAddEducation = (newEducation) => {
     setEducationList((prevList) => [...prevList, newEducation]);
   };
-  console.log(educationList)
+
+  const deleteEducation = (educationToBeDeleted) {
+    const filteredList = educationList.filter(education =>
+        education.school !== educationToBeDeleted
+    )
+    setEducationList(filteredList)
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
     
     <h2>Education</h2>
 
       {educationList.length >= 1 && educationList.map((edu, index) => (
-        <p key={index}>{edu.school}</p>
+            <div key={index} style={{display:'flex', justifyContent:'center'}}>
+            <p >{edu.school}</p>
+            <button onClick={() => deleteEducation(edu.school)}>Delete</button>
+        </div>
       ))}
 
       <button className="btn" onClick={() => setShowAddEducationForm(true)}>
