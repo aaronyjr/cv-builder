@@ -2,14 +2,14 @@
 import { useState } from 'react';
 import '../styles/Form.css';
 
-export function EducationDetails() {
+export function InputDetails() {
   const [educationList, setEducationList] = useState([]);
-  const [showAddForm, setShowAddForm] = useState(false); 
+  const [showAddEducationForm, setShowAddEducationForm] = useState(false); 
 
   const handleAddEducation = (newEducation) => {
     setEducationList((prevList) => [...prevList, newEducation]);
   };
-
+  console.log(educationList)
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
     
@@ -19,19 +19,19 @@ export function EducationDetails() {
         <p key={index}>{edu.school}</p>
       ))}
 
-      <button className="btn" onClick={() => setShowAddForm(true)}>
+      <button className="btn" onClick={() => setShowAddEducationForm(true)}>
         + Education
       </button>
 
-      {showAddForm && (
-        <AddNewEducationForm handleAddEducation={handleAddEducation} setShowAddForm={setShowAddForm} />
+      {showAddEducationForm && (
+        <AddNewEducationForm handleAddEducation={handleAddEducation} setShowAddForm={setShowAddEducationForm} />
       )}
     </div>
   );
 }
 
 function AddNewEducationForm({ handleAddEducation, setShowAddForm }) {
-  const [educationFormData, setEducationFormData] = useState({
+  const [currentEducationFormData, setCurrentEducationFormData] = useState({
     id: crypto.randomUUID(),
     school: '',
     degree: '',
@@ -41,7 +41,7 @@ function AddNewEducationForm({ handleAddEducation, setShowAddForm }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEducationFormData((prevData) => ({
+    setCurrentEducationFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -49,7 +49,10 @@ function AddNewEducationForm({ handleAddEducation, setShowAddForm }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAddEducation(educationFormData);
+    const hasNonEmptyField = Object.values(currentEducationFormData).some(value => value.trim() !== '');
+    if (hasNonEmptyField) {
+        handleAddEducation(currentEducationFormData);
+    }
     setShowAddForm(false);
   };
 
@@ -57,16 +60,16 @@ function AddNewEducationForm({ handleAddEducation, setShowAddForm }) {
     <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="school">School</label>
-        <input type="text" name="school" id="userSchool" value={educationFormData.school} onChange={handleChange} />
+        <input type="text" name="school" id="userSchool" value={currentEducationFormData.school} onChange={handleChange} />
 
         <label htmlFor="degree">Degree</label>
-        <input type="text" name="degree" id="userDegree" value={educationFormData.degree} onChange={handleChange} />
+        <input type="text" name="degree" id="userDegree" value={currentEducationFormData.degree} onChange={handleChange} />
 
         <label htmlFor="startDate">Start date</label>
-        <input type="text" name="startDate" id="startDate" value={educationFormData.startDate} onChange={handleChange} />
+        <input type="text" name="startDate" id="startDate" value={currentEducationFormData.startDate} onChange={handleChange} />
 
         <label htmlFor="endDate">End date</label>
-        <input type="text" name="endDate" id="endDate" value={educationFormData.endDate} onChange={handleChange} />
+        <input type="text" name="endDate" id="endDate" value={currentEducationFormData.endDate} onChange={handleChange} />
 
         <div>
           <button type="button" onClick={() => setShowAddForm(false)}>Cancel</button>

@@ -1,11 +1,12 @@
 import './App.css'
-import { EducationDetails } from './components/EducationDetails'
+import { InputDetails } from './components/EducationDetails'
 import { PersonalDetails } from './components/PersonalDetails'
+import { WorkExperienceDetails } from './components/WorkExperienceDetails'
 
 function App() {
   return (
     <>
-      <EducationDetails/>
+      <WorkExperienceDetails/>
     </>
   )
 }
