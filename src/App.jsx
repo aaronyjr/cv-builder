@@ -1,12 +1,10 @@
 import './App.css'
-import { InputDetails } from './components/EducationDetails'
-import { PersonalDetails } from './components/PersonalDetails'
-import { WorkExperienceDetails } from './components/WorkExperienceDetails'
+import { CvScreen } from './containers/CvScreen'
 
 function App() {
   return (
     <>
-      <WorkExperienceDetails/>
+      <CvScreen/>
     </>
   )
 }

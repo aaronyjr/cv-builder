@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "../styles/Form.css";
 
-export function InputDetails() {
+export function EducationDetails() {
   const [educationList, setEducationList] = useState([]);
   const [showAddEducationForm, setShowAddEducationForm] = useState(false);
 
