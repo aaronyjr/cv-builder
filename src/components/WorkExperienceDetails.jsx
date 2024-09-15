@@ -2,8 +2,7 @@
 import "../styles/Form.css";
 import { useState } from "react";
 
-export function WorkExperienceDetails() {
-  const [workExperienceList, setWorkExperienceList] = useState([]);
+export function WorkExperienceDetails({workExperienceList, setWorkExperienceList}) {
   const [showWorkExperienceForm, setShowWorkExperienceForm] = useState(false);
 
   const handleWorkExperience = (currentWorkExperienceFormData) => {
@@ -20,7 +19,6 @@ export function WorkExperienceDetails() {
     setWorkExperienceList(filteredCompanies);
   };
 
-  console.log(workExperienceList);
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -84,11 +82,10 @@ function AddNewWorkExperienceForm({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCurrentWorkExperienceFormData({
-      ...currentWorkExperienceFormData,
-      [name]: value,
-    });
-  };
+    setCurrentWorkExperienceFormData(prevData => (
+        {...prevData, [name]:value}
+    ))
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();

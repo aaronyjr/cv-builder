@@ -2,8 +2,7 @@
 import { useState } from "react";
 import "../styles/Form.css";
 
-export function EducationDetails() {
-  const [educationList, setEducationList] = useState([]);
+export function EducationDetails({ educationList, setEducationList }) {
   const [showAddEducationForm, setShowAddEducationForm] = useState(false);
 
   const handleAddEducation = (newEducation) => {
@@ -82,7 +81,7 @@ function AddNewEducationForm({ handleAddEducation, setShowAddForm }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const hasNonEmptyField = Object.values(currentEducationFormData).some(
+    const hasNonEmptyField = Object.values(currentEducationFormData.school).some(
       (value) => value.trim() !== ""
     );
     if (hasNonEmptyField) {
