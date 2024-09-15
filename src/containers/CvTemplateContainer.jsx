@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 export function CvTemplateContainer({ workExperienceList, educationList }) {
-  const aspectRatio = 1.414;
+  const pdfAspectRatio = 1.414;
   const height = "90vh";
-  const width = `calc(${height} / ${aspectRatio})`;
+  const width = `calc(${height} / ${pdfAspectRatio})`;
 
   return (
     <div style={{ height, width, backgroundColor: "red", marginLeft: "100px" }}>
@@ -10,12 +10,12 @@ export function CvTemplateContainer({ workExperienceList, educationList }) {
 
       </div>
       <div className="educationSection">
-        {educationList.length > 0 && educationList.map((education) => 
+        {educationList.length > 0 && educationList.map(education => 
           <CreateEducationDetailComponent key={education.id} educationDetail={education}/>
         )}
       </div>
       <div className="workExperienceSection">
-        {workExperienceList.length > 0 && workExperienceList.map((workExperience) =>
+        {workExperienceList.length > 0 && workExperienceList.map(workExperience =>
           <CreateWorkDetailComponent key={workExperience.id} workDetail={workExperience}/>
         )}
       </div>
@@ -23,36 +23,38 @@ export function CvTemplateContainer({ workExperienceList, educationList }) {
   );
 }
 
-
-function CreateWorkDetailComponent({workDetail}) {
-  return (
-    <p>{workDetail.companyName}</p>
-  )
-}
+// TODO: DESIGN BOTH COMPONENTS
 
 function CreateEducationDetailComponent({educationDetail}) {
+  const school = educationDetail.school;
+  const degree = educationDetail.degree;
+  const startDate = educationDetail.startDate
+  const endDate = educationDetail.endDate
+
   return (
-    <p>{educationDetail.school}</p>
+    <>
+    <p>{school}</p>
+    <p>{degree}</p>
+    <p>{startDate}</p>
+    <p>{endDate}</p>
+    </>
   )
 }
 
-// WORK
-// const [currentWorkExperienceFormData, setCurrentWorkExperienceFormData] =
-// useState({
-//   id: crypto.randomUUID,
-//   companyName: "",
-//   positionTitle: "",
-//   startDate: "",
-//   endDate: "",
-//   description: "",
-// });
+function CreateWorkDetailComponent({workDetail}) {
+  const companyName = workDetail.companyName;
+  const positionTitle = workDetail.positionTitle;
+  const startDate = workDetail.startDate;
+  const endDate = workDetail.endDate;
+  const description = workDetail.description
 
-
-// EDUCATION
-// const [currentEducationFormData, setCurrentEducationFormData] = useState({
-//   id: crypto.randomUUID(),
-//   school: "",
-//   degree: "",
-//   startDate: "",
-//   endDate: "",
-// });
+  return (
+    <>
+    <p>{companyName}</p>
+    <p>{positionTitle}</p>
+    <p>{startDate}</p>
+    <p>{endDate}</p>
+    <p>{description}</p>
+    </>
+  )
+}
