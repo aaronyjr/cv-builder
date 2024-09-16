@@ -4,16 +4,30 @@ import "../styles/Form.css";
 
 export function EducationDetails({ educationList, setEducationList }) {
   const [showAddEducationForm, setShowAddEducationForm] = useState(false);
+  const [educationToEdit, setEducationToEdit] = useState(null);
 
   const handleAddEducation = (newEducation) => {
-    setEducationList((prevList) => [...prevList, newEducation]);
+    if (educationToEdit) {
+      const updatedEducationList = educationList.map((education) =>
+        education.id === educationToEdit.id ? newEducation : education
+      );
+      setEducationList(updatedEducationList);
+      setEducationToEdit(null); 
+    } else {
+      setEducationList((prevList) => [...prevList, newEducation]);
+    }
   };
 
   const deleteEducation = (educationToBeDeleted) => {
     const filteredList = educationList.filter(
-      (education) => education.school !== educationToBeDeleted
+      (education) => education.id !== educationToBeDeleted
     );
     setEducationList(filteredList);
+  };
+
+  const handleEditClick = (education) => {
+    setEducationToEdit(education);
+    setShowAddEducationForm(true);
   };
 
   return (
@@ -21,12 +35,12 @@ export function EducationDetails({ educationList, setEducationList }) {
       <h2>Education</h2>
 
       {educationList.length >= 1 &&
-        educationList.map((edu, index) => (
+        educationList.map((edu) => (
           <div
-            key={index}
+            key={edu.id}
             style={{ display: "flex", justifyContent: "center" }}
           >
-            <p>{edu.school}</p>
+            <button onClick={() => handleEditClick(edu)}>{edu.school}</button>
             <button
               style={{
                 backgroundColor: "red",
@@ -41,7 +55,7 @@ export function EducationDetails({ educationList, setEducationList }) {
                 marginTop: "18px",
                 marginLeft: "8px",
               }}
-              onClick={() => deleteEducation(edu.school)}
+              onClick={() => deleteEducation(edu.id)}
             >
               Del
             </button>
@@ -56,19 +70,24 @@ export function EducationDetails({ educationList, setEducationList }) {
         <AddNewEducationForm
           handleAddEducation={handleAddEducation}
           setShowAddForm={setShowAddEducationForm}
+          educationToEdit={educationToEdit}
         />
       )}
     </div>
   );
 }
 
-function AddNewEducationForm({ handleAddEducation, setShowAddForm }) {
+function AddNewEducationForm({
+  handleAddEducation,
+  setShowAddForm,
+  educationToEdit,
+}) {
   const [currentEducationFormData, setCurrentEducationFormData] = useState({
-    id: crypto.randomUUID(),
-    school: "",
-    degree: "",
-    startDate: "",
-    endDate: "",
+    id: educationToEdit ? educationToEdit.id : crypto.randomUUID(),
+    school: educationToEdit ? educationToEdit.school : "",
+    degree: educationToEdit ? educationToEdit.degree : "",
+    startDate: educationToEdit ? educationToEdit.startDate : "",
+    endDate: educationToEdit ? educationToEdit.endDate : "",
   });
 
   const handleChange = (e) => {
@@ -81,9 +100,9 @@ function AddNewEducationForm({ handleAddEducation, setShowAddForm }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const hasNonEmptyField = Object.values(currentEducationFormData.school).some(
-      (value) => value.trim() !== ""
-    );
+    const hasNonEmptyField = Object.values(
+      currentEducationFormData.school
+    ).some((value) => value.trim() !== "");
     if (hasNonEmptyField) {
       handleAddEducation(currentEducationFormData);
     }
