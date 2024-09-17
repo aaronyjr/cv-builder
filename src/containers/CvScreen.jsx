@@ -5,6 +5,7 @@ import { CvTemplateContainer } from "./CvTemplateContainer";
 import { useState } from "react";
 
 export function CvScreen() {
+  const [personalDetails, setPersonalDetails] = useState("");
   const [workExperienceList, setWorkExperienceList] = useState([]);
   const [educationList, setEducationList] = useState([]);
 
@@ -19,7 +20,10 @@ export function CvScreen() {
         className="left"
         style={{ width: "100%", height: "90vh", backgroundColor: "purple" }}
       >
-        <PersonalDetails />
+        <PersonalDetails
+          inputValue={personalDetails}
+          setInputValue={setPersonalDetails}
+        />
         <EducationDetails
           educationList={educationList}
           setEducationList={setEducationList}
@@ -31,10 +35,10 @@ export function CvScreen() {
       </div>
       <div className="right" style={{ width: "100%" }}>
         <CvTemplateContainer
+          personalDetails={personalDetails}
           workExperienceList={workExperienceList}
           educationList={educationList}
         />
-        <p></p>
       </div>
     </div>
   );
