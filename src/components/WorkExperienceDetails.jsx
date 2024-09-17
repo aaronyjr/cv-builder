@@ -1,97 +1,80 @@
 /* eslint-disable react/prop-types */
 import "../styles/Form.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function WorkExperienceDetails({
-    workExperienceList,
-    setWorkExperienceList,
-  }) {
-    const [showWorkExperienceForm, setShowWorkExperienceForm] = useState(false);
-    const [workExperienceToBeEdited, setWorkExperienceToBeEdited] = useState(null);
-  
-    const handleAddWorkExperience = (currentWorkExperienceFormData) => {
-      if (workExperienceToBeEdited) {
-        const updatedList = workExperienceList.map((experience) =>
-          experience.id === currentWorkExperienceFormData.id
-            ? currentWorkExperienceFormData
-            : experience
-        );
-        setWorkExperienceList(updatedList);
-        setWorkExperienceToBeEdited(null);
-      } else {
+  workExperienceList,
+  setWorkExperienceList,
+}) {
+  const [showWorkExperienceForm, setShowWorkExperienceForm] = useState(false);
+  const [workExperienceToBeEdited, setWorkExperienceToBeEdited] = useState(null);
 
-        setWorkExperienceList((prevList) => [
-          ...prevList,
-          currentWorkExperienceFormData,
-        ]);
-      }
-      setShowWorkExperienceForm(false); 
-    };
-  
-    const handleEditWorkExperience = (work) => {
-      setWorkExperienceToBeEdited(work);
-      setShowWorkExperienceForm(true);
-    };
-  
-    const deleteWorkExperience = (companyIdToBeRemoved) => {
-      const filteredCompanies = workExperienceList.filter(
-        (company) => company.id !== companyIdToBeRemoved
+  const handleAddWorkExperience = (currentWorkExperienceFormData) => {
+    if (workExperienceToBeEdited) {
+      const updatedList = workExperienceList.map((experience) =>
+        experience.id === currentWorkExperienceFormData.id
+          ? currentWorkExperienceFormData
+          : experience
       );
-      setWorkExperienceList(filteredCompanies);
-    };
-  
-    return (
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <h2>Experience</h2>
-  
-        {workExperienceList.length > 0 &&
-          workExperienceList.map((workExperience, index) => (
-            <div
-              key={index}
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <button
-                onClick={() => handleEditWorkExperience(workExperience)}
-              >
-                {workExperience.companyName}
-              </button>
-              <button
-                style={{
-                  backgroundColor: "red",
-                  color: "white",
-                  border: "none",
-                  padding: "0",
-                  height: "20px",
-                  width: "40px",
-                  borderRadius: "3px",
-                  fontSize: "10px",
-                  textAlign: "center",
-                  marginTop: "18px",
-                  marginLeft: "8px",
-                }}
-                onClick={() => deleteWorkExperience(workExperience.id)}
-              >
-                Del
-              </button>
-            </div>
-          ))}
-  
-        <button className="btn" onClick={() => setShowWorkExperienceForm(true)}>
-          + Experience
-        </button>
-  
-        {showWorkExperienceForm && (
-          <AddNewWorkExperienceForm
-            handleAddWorkExperience={handleAddWorkExperience}
-            setShowAddWorkExperienceForm={setShowWorkExperienceForm}
-            workDetailsToEdit={workExperienceToBeEdited}
-          />
-        )}
-      </div>
-    );
-  }
+      setWorkExperienceList(updatedList);
+      setWorkExperienceToBeEdited(null);
+    } else {
+      setWorkExperienceList((prevList) => [
+        ...prevList,
+        currentWorkExperienceFormData,
+      ]);
+    }
+    setShowWorkExperienceForm(false);
+  };
 
-import { useEffect } from "react";
+  const handleEditWorkExperience = (work) => {
+    setWorkExperienceToBeEdited(work);
+    setShowWorkExperienceForm(true);
+  };
+
+  const deleteWorkExperience = (companyIdToBeRemoved) => {
+    const filteredCompanies = workExperienceList.filter(
+      (company) => company.id !== companyIdToBeRemoved
+    );
+    setWorkExperienceList(filteredCompanies);
+  };
+
+  return (
+    <div className="work-experience-container">
+      <h2>Experience</h2>
+
+      {workExperienceList.length > 0 &&
+        workExperienceList.map((workExperience, index) => (
+          <div key={index} className="work-experience-list-item">
+            <button onClick={() => handleEditWorkExperience(workExperience)}>
+              {workExperience.companyName}
+            </button>
+            <button
+              style={{ backgroundColor: "red" }}
+              onClick={() => deleteWorkExperience(workExperience.id)}
+            >
+              Del
+            </button>
+          </div>
+        ))}
+
+      <button
+        className="add-work-experience-button"
+        onClick={() => setShowWorkExperienceForm(true)}
+      >
+        + Experience
+      </button>
+
+      {showWorkExperienceForm && (
+        <AddNewWorkExperienceForm
+          handleAddWorkExperience={handleAddWorkExperience}
+          setShowAddWorkExperienceForm={setShowWorkExperienceForm}
+          workDetailsToEdit={workExperienceToBeEdited}
+        />
+      )}
+    </div>
+  );
+}
 
 function AddNewWorkExperienceForm({
   handleAddWorkExperience,
@@ -135,63 +118,61 @@ function AddNewWorkExperienceForm({
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="companyName">Company Name</label>
-        <input
-          type="text"
-          name="companyName"
-          id="userCompanyName"
-          value={currentWorkExperienceFormData.companyName}
-          onChange={handleChange}
-        />
+    <form onSubmit={handleSubmit} className="add-work-experience-form">
+      <label htmlFor="companyName">Company Name</label>
+      <input
+        type="text"
+        name="companyName"
+        id="userCompanyName"
+        value={currentWorkExperienceFormData.companyName}
+        onChange={handleChange}
+      />
 
-        <label htmlFor="positionTitle">Position Title</label>
-        <input
-          type="text"
-          name="positionTitle"
-          id="userPositionTitle"
-          value={currentWorkExperienceFormData.positionTitle}
-          onChange={handleChange}
-        />
+      <label htmlFor="positionTitle">Position Title</label>
+      <input
+        type="text"
+        name="positionTitle"
+        id="userPositionTitle"
+        value={currentWorkExperienceFormData.positionTitle}
+        onChange={handleChange}
+      />
 
-        <label htmlFor="startDate">Start date</label>
-        <input
-          type="text"
-          name="startDate"
-          id="startDate"
-          value={currentWorkExperienceFormData.startDate}
-          onChange={handleChange}
-        />
+      <label htmlFor="startDate">Start date</label>
+      <input
+        type="text"
+        name="startDate"
+        id="startDate"
+        value={currentWorkExperienceFormData.startDate}
+        onChange={handleChange}
+      />
 
-        <label htmlFor="endDate">End date</label>
-        <input
-          type="text"
-          name="endDate"
-          id="endDate"
-          value={currentWorkExperienceFormData.endDate}
-          onChange={handleChange}
-        />
+      <label htmlFor="endDate">End date</label>
+      <input
+        type="text"
+        name="endDate"
+        id="endDate"
+        value={currentWorkExperienceFormData.endDate}
+        onChange={handleChange}
+      />
 
-        <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          name="description"
-          id="jobDescription"
-          value={currentWorkExperienceFormData.description}
-          onChange={handleChange}
-        />
+      <label htmlFor="description">Description</label>
+      <input
+        type="text"
+        name="description"
+        id="jobDescription"
+        value={currentWorkExperienceFormData.description}
+        onChange={handleChange}
+      />
 
-        <div>
-          <button
-            type="button"
-            onClick={() => setShowAddWorkExperienceForm(false)}
-          >
-            Cancel
-          </button>
-          <button type="submit">Save</button>
-        </div>
-      </form>
-    </>
+      <div className="form-buttons">
+        <button
+          type="button"
+          onClick={() => setShowAddWorkExperienceForm(false)}
+        >
+          Cancel
+        </button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
   );
 }

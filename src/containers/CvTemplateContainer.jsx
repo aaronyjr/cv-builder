@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import '../styles/ResumeContent.css'
+
 export function CvTemplateContainer({
   personalDetails,
   workExperienceList,
@@ -9,17 +11,20 @@ export function CvTemplateContainer({
   const width = `calc(${height} / ${pdfAspectRatio})`;
 
   return (
-    <div style={{ height, width, backgroundColor: "red", marginLeft: "100px" }}>
+    <div className='cvTemplate' style={{ height, width, marginLeft: "100px", backgroundColor:'#f9f9f9'}}>
       <div
         className="header"
-        style={{ width: "100%", backgroundColor: "yellow", height: "14%" }}
+        style={{ width: "100%", backgroundColor: "blue", minHeight: "14%" }}
       >
-        <p>{personalDetails.fullName}</p>
-        <p>{personalDetails.userEmail}</p>
-        <p>{personalDetails.userPhoneNumber}</p>
-        <p>{personalDetails.fullName}</p>
+        <h4 style={{marginBottom:'0px', marginTop:'14px'}}>{personalDetails.fullName}</h4>
+        <ul>
+          <li>{personalDetails.userEmail}</li>
+          <li>{personalDetails.userPhoneNumber}</li>
+          <li>{personalDetails.userAddress}</li>
+        </ul>
       </div>
       <div className="educationSection">
+        {educationList.length > 0 && <p>Education</p>}
         {educationList.length > 0 &&
           educationList.map((education) => (
             <CreateEducationDetailComponent
@@ -29,6 +34,8 @@ export function CvTemplateContainer({
           ))}
       </div>
       <div className="workExperienceSection">
+        {workExperienceList.length > 0 && <p>Professional Experience</p>}
+
         {workExperienceList.length > 0 &&
           workExperienceList.map((workExperience) => (
             <CreateWorkDetailComponent
@@ -42,35 +49,37 @@ export function CvTemplateContainer({
 }
 
 function CreateEducationDetailComponent({ educationDetail }) {
-  const school = educationDetail.school;
-  const degree = educationDetail.degree;
-  const startDate = educationDetail.startDate;
-  const endDate = educationDetail.endDate;
+  const { school, degree, startDate, endDate } = educationDetail;
 
   return (
-    <>
-      <p>{school}</p>
-      <p>{degree}</p>
-      <p>{startDate}</p>
-      <p>{endDate}</p>
-    </>
+    <div className="resume-container">
+      <div className="resume-section">
+        <div className="resume-date">{`${startDate} - ${endDate}`}</div>
+        <div className="resume-content">
+          <h4>{school}</h4>
+          <p>{degree}</p>
+        </div>
+      </div>
+      <div className="resume-divider"></div>
+    </div>
   );
 }
 
 function CreateWorkDetailComponent({ workDetail }) {
-  const companyName = workDetail.companyName;
-  const positionTitle = workDetail.positionTitle;
-  const startDate = workDetail.startDate;
-  const endDate = workDetail.endDate;
-  const description = workDetail.description;
+  const { companyName, positionTitle, startDate, endDate, description } = workDetail;
 
   return (
-    <>
-      <p>{companyName}</p>
-      <p>{positionTitle}</p>
-      <p>{startDate}</p>
-      <p>{endDate}</p>
-      <p>{description}</p>
-    </>
+    <div className="resume-container">
+      <div className="resume-section">
+        <div className="resume-date">{`${startDate} - ${endDate}`}</div>
+        <div className="resume-content">
+          <ul>
+            <li>{companyName}</li>
+            <li>{positionTitle}</li>
+            <li>{description}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 }

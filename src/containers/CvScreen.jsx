@@ -18,7 +18,7 @@ export function CvScreen() {
     <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
       <div
         className="left"
-        style={{ width: "100%", height: "90vh", backgroundColor: "purple" }}
+        style={{ width: "100%", height: "90vh" }}
       >
         <PersonalDetails
           inputValue={personalDetails}

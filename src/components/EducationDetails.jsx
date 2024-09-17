@@ -31,38 +31,20 @@ export function EducationDetails({ educationList, setEducationList }) {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div className="education-details-container">
       <h2>Education</h2>
 
       {educationList.length >= 1 &&
         educationList.map((edu) => (
-          <div
-            key={edu.id}
-            style={{ display: "flex", justifyContent: "center" }}
-          >
+          <div key={edu.id} className="education-list-item">
             <button onClick={() => handleEditClick(edu)}>{edu.school}</button>
-            <button
-              style={{
-                backgroundColor: "red",
-                color: "white",
-                border: "none",
-                padding: "0",
-                height: "20px",
-                width: "40px",
-                borderRadius: "3px",
-                fontSize: "10px",
-                textAlign: "center",
-                marginTop: "18px",
-                marginLeft: "8px",
-              }}
-              onClick={() => deleteEducation(edu.id)}
-            >
+            <button onClick={() => deleteEducation(edu.id)} style={{ backgroundColor: "red" }}>
               Del
             </button>
           </div>
         ))}
 
-      <button className="btn" onClick={() => setShowAddEducationForm(true)}>
+      <button className="add-education-button" onClick={() => setShowAddEducationForm(true)}>
         + Education
       </button>
 
@@ -77,11 +59,7 @@ export function EducationDetails({ educationList, setEducationList }) {
   );
 }
 
-function AddNewEducationForm({
-  handleAddEducation,
-  setShowAddForm,
-  educationToEdit,
-}) {
+function AddNewEducationForm({ handleAddEducation, setShowAddForm, educationToEdit }) {
   const [currentEducationFormData, setCurrentEducationFormData] = useState({
     id: educationToEdit ? educationToEdit.id : crypto.randomUUID(),
     school: educationToEdit ? educationToEdit.school : "",
@@ -110,51 +88,50 @@ function AddNewEducationForm({
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="school">School</label>
-        <input
-          type="text"
-          name="school"
-          id="userSchool"
-          value={currentEducationFormData.school}
-          onChange={handleChange}
-        />
+    <form onSubmit={handleSubmit} className="add-education-form">
+      <label htmlFor="school">School</label>
+      <input
+        type="text"
+        name="school"
+        id="userSchool"
+        value={currentEducationFormData.school}
+        onChange={handleChange}
+      />
 
-        <label htmlFor="degree">Degree</label>
-        <input
-          type="text"
-          name="degree"
-          id="userDegree"
-          value={currentEducationFormData.degree}
-          onChange={handleChange}
-        />
+      <label htmlFor="degree">Degree</label>
+      <input
+        type="text"
+        name="degree"
+        id="userDegree"
+        value={currentEducationFormData.degree}
+        onChange={handleChange}
+      />
 
-        <label htmlFor="startDate">Start date</label>
-        <input
-          type="text"
-          name="startDate"
-          id="startDate"
-          value={currentEducationFormData.startDate}
-          onChange={handleChange}
-        />
+      <label htmlFor="startDate">Start date</label>
+      <input
+        type="text"
+        name="startDate"
+        id="startDate"
+        value={currentEducationFormData.startDate}
+        onChange={handleChange}
+      />
 
-        <label htmlFor="endDate">End date</label>
-        <input
-          type="text"
-          name="endDate"
-          id="endDate"
-          value={currentEducationFormData.endDate}
-          onChange={handleChange}
-        />
+      <label htmlFor="endDate">End date</label>
+      <input
+        type="text"
+        name="endDate"
+        id="endDate"
+        value={currentEducationFormData.endDate}
+        onChange={handleChange}
+      />
 
-        <div>
-          <button type="button" onClick={() => setShowAddForm(false)}>
-            Cancel
-          </button>
-          <button type="submit">Save</button>
-        </div>
-      </form>
-    </>
+      <div className="form-buttons">
+        <button type="button" onClick={() => setShowAddForm(false)}>
+          Cancel
+        </button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
   );
 }
+

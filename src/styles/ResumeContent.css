@@ -1,0 +1,90 @@
+.resume-container {
+  font-family: "Times New Roman", Times, serif;
+  line-height: 1.5;
+  margin: 20px;
+}
+
+.resume-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.resume-date {
+  width: 25%;
+  font-weight: bold;
+  color: #555;
+}
+
+.resume-content {
+  align-items: start;
+  width: 70%;
+}
+
+.resume-content h4 {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+}
+
+.resume-content p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.resume-content ul {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.resume-divider {
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 14%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  list-style: none;
+  padding-left: 0;
+}
+
+.header h4 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.header li {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.educationSection p,
+.workExperienceSection p {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+}
+
+.educationSection .resume-content {
+  text-align: left;
+}
