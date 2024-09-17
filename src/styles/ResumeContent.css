@@ -88,3 +88,7 @@ ul {
 .educationSection .resume-content {
   text-align: left;
 }
+
+.cvTemplate {
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+}
