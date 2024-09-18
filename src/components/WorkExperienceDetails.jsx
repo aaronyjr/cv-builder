@@ -71,7 +71,7 @@ export function WorkExperienceDetails({
               {workExperience.companyName}
             </button>
             <button
-              style={{ backgroundColor: "red" }}
+              style={{ backgroundColor: "red", transform:'translate(10px,2px)'}}
               onClick={() => deleteWorkExperience(workExperience.id)}
             >
               Del

@@ -58,7 +58,7 @@ export function EducationDetails({ educationList, setEducationList }) {
             <button onClick={() => handleEditClick(edu)}>{edu.school}</button>
             <button
               onClick={() => deleteEducation(edu.id)}
-              style={{ backgroundColor: "red" }}
+              style={{ backgroundColor: "red", transform:'translate(10px, 2px)'}}
             >
               Del
             </button>
