@@ -24,7 +24,7 @@ export function PersonalDetails({ inputValue, setInputValue }) {
           height="22px"
           style={{
             transform: "translate(-10px, 20px)",
-          }} /* Apply the same transform */
+          }}
         >
           <path
             strokeLinecap="round"
