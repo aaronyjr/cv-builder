@@ -24,6 +24,7 @@ export function CvScreen() {
 
   const [workExperienceList, setWorkExperienceList] = useState([
     {
+      id:crypto.randomUUID(),
       companyName: "Los Angeles Lakers",
       positionTitle: "Professional Basketball Player",
       startDate: "2018",
@@ -32,6 +33,7 @@ export function CvScreen() {
         "Leading team as a forward in the NBA, winning the NBA Championship finals in 2020, achieving the finals MVP award.",
     },
     {
+      id:crypto.randomUUID(),
       companyName: "Cleveland Cavaliers",
       positionTitle: "Professional Basketball Player",
       startDate: "2014",
