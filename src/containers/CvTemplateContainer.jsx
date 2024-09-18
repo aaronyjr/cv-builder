@@ -17,7 +17,7 @@ export function CvTemplateContainer({
     >
       <div
         className="header"
-        style={{ width: "100%", backgroundColor: "#008080", minHeight: "14%" }}
+        style={{ width: "100%", backgroundColor: '#4db6ac', minHeight: "14%" }}
       >
         <h4 style={{ marginBottom: "0px", marginTop: "14px" }}>
           {personalDetails.fullName}
