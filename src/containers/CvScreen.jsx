@@ -3,6 +3,7 @@ import { WorkExperienceDetails } from "../components/WorkExperienceDetails";
 import { PersonalDetails } from "../components/PersonalDetails";
 import { CvTemplateContainer } from "./CvTemplateContainer";
 import { useState } from "react";
+import "../styles/CvScreenStyle.css";
 
 export function CvScreen() {
   const [personalDetails, setPersonalDetails] = useState("");
@@ -16,10 +17,7 @@ export function CvScreen() {
 
   return (
     <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-      <div
-        className="left"
-        style={{ width: "100%", height: "90vh" }}
-      >
+      <div className="left" style={{ width: "100%", height: "90vh" }}>
         <PersonalDetails
           inputValue={personalDetails}
           setInputValue={setPersonalDetails}
@@ -33,7 +31,7 @@ export function CvScreen() {
           setWorkExperienceList={setWorkExperienceList}
         />
       </div>
-      <div className="right" style={{ width: "100%" }}>
+      <div className="right" style={{ width: "100%", height:'5000px' }}>
         <CvTemplateContainer
           personalDetails={personalDetails}
           workExperienceList={workExperienceList}
