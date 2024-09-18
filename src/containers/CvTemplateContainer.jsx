@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import '../styles/ResumeContent.css'
+import "../styles/ResumeContent.css";
 
 export function CvTemplateContainer({
   personalDetails,
@@ -11,12 +11,17 @@ export function CvTemplateContainer({
   const width = `calc(${height} / ${pdfAspectRatio})`;
 
   return (
-    <div className='cvTemplate' style={{ height, width, marginLeft: "100px", backgroundColor:'#f9f9f9'}}>
+    <div
+      className="cvTemplate"
+      style={{ height, width, marginLeft: "100px", backgroundColor: "#f9f9f9" }}
+    >
       <div
         className="header"
-        style={{ width: "100%", backgroundColor: "blue", minHeight: "14%" }}
+        style={{ width: "100%", backgroundColor: "#008080", minHeight: "14%" }}
       >
-        <h4 style={{marginBottom:'0px', marginTop:'14px'}}>{personalDetails.fullName}</h4>
+        <h4 style={{ marginBottom: "0px", marginTop: "14px" }}>
+          {personalDetails.fullName}
+        </h4>
         <ul>
           <li>{personalDetails.userEmail}</li>
           <li>{personalDetails.userPhoneNumber}</li>
@@ -33,6 +38,12 @@ export function CvTemplateContainer({
             />
           ))}
       </div>
+      {educationList.length > 0 && workExperienceList.length > 0 && (
+        <div
+          className="divider"
+          style={{ borderBottom: "1px solid #ccc", width:'80%', marginLeft:'auto', marginRight:'auto' }}
+        ></div>
+      )}
       <div className="workExperienceSection">
         {workExperienceList.length > 0 && <p>Professional Experience</p>}
 
@@ -60,13 +71,13 @@ function CreateEducationDetailComponent({ educationDetail }) {
           <p>{degree}</p>
         </div>
       </div>
-      <div className="resume-divider"></div>
     </div>
   );
 }
 
 function CreateWorkDetailComponent({ workDetail }) {
-  const { companyName, positionTitle, startDate, endDate, description } = workDetail;
+  const { companyName, positionTitle, startDate, endDate, description } =
+    workDetail;
 
   return (
     <div className="resume-container">

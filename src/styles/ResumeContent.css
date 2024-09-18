@@ -40,8 +40,10 @@
 }
 
 .resume-divider {
-  border-bottom: 1px solid #ddd;
+    display: flex;
+  border-bottom: 1px solid #6b6565;
   margin-top: 10px;
+  width:80%
 }
 
 .header {
@@ -83,6 +85,7 @@ ul {
 .workExperienceSection p {
   font-family: "Times New Roman", Times, serif;
   font-size: 20px;
+  font-weight: bold;
 }
 
 .educationSection .resume-content {
@@ -90,5 +93,17 @@ ul {
 }
 
 .cvTemplate {
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 10px 15px rgba(2, 0, 0, 0.2);
+}
+
+.resume-content li:first-child {
+    font-weight: bold;
+}
+
+.resume-content {
+    color: black;
+}
+
+.header {
+    font-family: 'Times New Roman', Times, serif;
 }
